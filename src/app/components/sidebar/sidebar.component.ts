@@ -35,6 +35,11 @@ export class SidebarComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  logout(){
+    localStorage.clear();
+    window.location.reload();
+  }
+
   ngOnInit() {
     this.url = 'https://www.ecell.in/ca/dash/assets/img/person_holder.jpg';
     if(localStorage.getItem('image_url')){
