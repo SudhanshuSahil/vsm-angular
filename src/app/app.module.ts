@@ -13,6 +13,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { BrowserModule } from '@angular/platform-browser';
+import { TimerComponent } from './pages/timer/timer.component';
+
+import { CountdownModule } from 'ngx-countdown';
+import { FaqComponent } from './pages/faq/faq.component';
+import { SponserComponent } from './pages/sponser/sponser.component';
+import { BonusComponent } from './pages/bonus/bonus.component';
 
 @NgModule({
   imports: [
@@ -22,14 +30,40 @@ import { ComponentsModule } from './components/components.module';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule,
+    SocialLoginModule,
+    CountdownModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    TimerComponent,
+    FaqComponent,
+    SponserComponent,
+    BonusComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '735357982777-nns9lfqfsmav55bj29p2jou231qve1r9.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('669691347230770'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
