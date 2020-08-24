@@ -8,7 +8,8 @@
     <!-- Brand -->
     <a class="navbar-brand pt-0" href="https://www.ecell.in/2019/" target="_blank">
       <img src="assets/img/icons/common/black_logo.png" class="navbar-brand-image logo" alt="E-Cell"></a>
-      <span class="logo-inverse">Virtual Stock Market</span>
+      <span *ngIf="!game_time" class="logo-inverse">Market Closed</span>
+      <span *ngIf="game_time" class="logo-inverse">Market Open</span>
 
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
@@ -90,8 +91,8 @@
       <hr class="my-3">
       <!-- Heading -->
           <a class="navbar-brand pt-0" href="https://www.5paisa.com/" target="_blank">
-      <img src="assets/img/icons/common/5paisa.png" style="max-height: 100px; max-width: 100px; margin-top: 40vh;" class="navbar-brand-image logo" alt="..."></a>
-      <h6 style="position: absolute; margin-top: 40vh;" style="margin-bottom: 0px;" class="navbar-heading text-muted text-center logo">Title Sponsor</h6>
+      <img src="assets/img/icons/common/5paisa.png" style="max-width: 200px; margin-top: 4vh;" class="navbar-brand-image logo" alt="..."></a>
+      <h6 style="position: absolute; margin-top: 4vh;" style="margin-bottom: 0px;" class="navbar-heading text-muted text-center logo">Title Sponsor</h6>
 
     </div>
   </div>

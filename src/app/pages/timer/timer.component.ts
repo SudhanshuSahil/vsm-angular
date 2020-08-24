@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription, interval } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SpinnerService } from 'src/app/spinner/spinner.service';
 
 @Component({
   selector: 'app-timer',
@@ -20,7 +21,7 @@ export class TimerComponent implements OnInit {
 
   config = {};
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private spinner: SpinnerService) { }
 
   dhms(t) {
     var days, hours, minutes, seconds;
@@ -42,6 +43,7 @@ export class TimerComponent implements OnInit {
 
 
   update_profile(){
+    this.spinner.requestStarted()
     console.log('yaha aaya');
     var access_token = localStorage.getItem('token');
     var header = new HttpHeaders({
@@ -54,9 +56,12 @@ export class TimerComponent implements OnInit {
 
     this.http.patch<any>("https://django.ecell.in/vsm/me/", body,  {headers: header}).subscribe(
       data => {
-        console.log(data)
+        this.spinner.requestEnded()
+        // console.log(data);
+        alert('Your Demat account ID has been noted')
       },
       error => {
+        this.spinner.requestEnded()
         console.log(error);
         
       }
@@ -67,6 +72,7 @@ export class TimerComponent implements OnInit {
 
   
   ngOnInit(): void {
+    this.spinner.requestStarted()
     var access_token = localStorage.getItem('token');
     var header = new HttpHeaders({
       'Authorization': "Bearer " + access_token 
@@ -74,7 +80,8 @@ export class TimerComponent implements OnInit {
     
     this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
       data => {
-        console.log(data)
+        this.spinner.requestEnded()
+        // console.log(data)
         this.demat = data['demat_accout']
       },
       error => {

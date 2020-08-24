@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SpinnerService } from 'src/app/spinner/spinner.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,9 +22,10 @@ export class UserProfileComponent implements OnInit {
   program;
   hostel;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private spinner: SpinnerService) {}
 
   update_profile(){
+    this.spinner.requestStarted()
     var access_token = localStorage.getItem('token');
     var header = new HttpHeaders({
       'Authorization': "Bearer " + access_token 
@@ -45,10 +47,12 @@ export class UserProfileComponent implements OnInit {
 
     this.http.patch<any>("https://django.ecell.in/vsm/me/", body,  {headers: header}).subscribe(
       data => {
-        console.log(data);
+        this.spinner.requestEnded()
+        // console.log(data);
         alert("your profile has been successfully updated");
       },
       error => {
+        this.spinner.requestEnded()
         console.log(error);
         
       }
@@ -58,8 +62,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.requestStarted();
     this.image_src = 'https://www.ecell.in/ca/dash/assets/img/person_holder.jpg';
-    this.email = "email hai na be"
     var access_token = localStorage.getItem('token');
     this.is_iitb = false;
 
@@ -89,11 +93,12 @@ export class UserProfileComponent implements OnInit {
         this.roll_number = data['roll_number'];
         if(this.roll_number == 'not_iitb'){
           this.roll_number = ''
-        }        
+        }     
+        this.spinner.requestEnded();   
       },
       error => {
         console.log(error);
-        
+        this.spinner.requestEnded();        
       }
     )
 

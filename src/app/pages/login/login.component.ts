@@ -3,6 +3,7 @@ import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
 
 
 @Component({
@@ -22,9 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private http: HttpClient, private router: Router) {}
 
   signInWithGoogle(): void {
+    // this.authService.initState.subscribe(() => {}, (console.error), () => {console.log('all providers are ready')});
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    // this.authService.initState.subscribe(() => {}, console.error, () => {console.log('all providers are ready')});
-    
   }
 
   signInWithFB(): void {
@@ -64,6 +64,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.access_token = data['access_token'];
       // console.log(data);
       localStorage.setItem('token', this.access_token);
+      localStorage.setItem('refresh_token', data['refresh_token'])
+      
       this.router.navigate(['user-profile'])
     });
 

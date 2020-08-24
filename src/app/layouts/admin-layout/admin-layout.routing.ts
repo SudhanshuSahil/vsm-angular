@@ -8,16 +8,24 @@ import { TablesComponent } from '../../pages/tables/tables.component';
 import { TimerComponent } from 'src/app/pages/timer/timer.component';
 import { FaqComponent } from 'src/app/pages/faq/faq.component';
 import { SponserComponent } from 'src/app/pages/sponser/sponser.component';
+import { MarketComponent } from 'src/app/pages/market/market.component';
+import { HoldingComponent } from 'src/app/pages/holding/holding.component';
+import { TransacComponent } from 'src/app/pages/transac/transac.component';
+import { NewsComponent } from 'src/app/pages/news/news.component';
+import { LeaderboardComponent } from 'src/app/pages/leaderboard/leaderboard.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: SponserComponent },
-    { path: 'dashboard_manager',      component: DashboardComponent },
+    { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'faq',           component: FaqComponent },
     { path: 'sponsor',           component: SponserComponent },
-    { path: 'market',           component: SponserComponent },
+    { path: 'market',           component: MarketComponent },
     { path: 'bonus',           component: TimerComponent },
+    { path: 'holding',           component: HoldingComponent },
+    { path: 'transac',           component: TransacComponent },
+    { path: 'news',           component: NewsComponent },
+    { path: 'leaderboard',           component: LeaderboardComponent },
 ];

@@ -1,0 +1,82 @@
+<div class="header py-7 py-lg-8" style="background: linear-gradient(to right,#673400, #834200, #964b00, #a4550a, #b6551d);">
+    <div class="container">
+      <div class="header-body text-center mb-7">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-6">
+            <!-- <p class="text-lead text-dark" style="font-weight: 400; z-index: 900;">If you face any issues while the playing the game, please post it on the <a href="#" target="__blank">Facebook group</a></p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container mt--8 pb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="card bg-secondary shadow border-0">
+          <div class="card-header bg-transparent pb-5">
+            <div class="text-center text-dark">
+              <img class="right" style="width: 400px;  margin-top: -40px;" src="assets/img/icons/common/vsm_black.png">
+              <!-- <h1>Virtual Stock Market Simulator</h1> -->
+            </div> 
+  
+            <div class="text-center text-dark mb-4">
+                Count: {{rec_count}} <br>
+                Success: {{success}} <br>
+                Fail: {{fail}} <br>
+                Token: {{token}}
+            </div>
+
+            <div class="text-center text-dark mb-4">
+              <input name="tok" type="text" [(ngModel)]="authToken" placeholder="auth token from google">
+              <br>
+              <input name="req" type="number" [(ngModel)]="reqs" placeholder="number of request per sec">
+              <br>
+              <input name="dt" type="text" [(ngModel)]="dToken" placeholder="django access token">
+              <br>
+              <input name="code" type="text" [(ngModel)]="code" placeholder="company code">
+          </div>
+
+            
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <div class="text-muted text-center mt-2 mb-3"><small>Overload with</small></div>
+            <div class="btn-wrapper text-center">
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon" (click)="trans()">
+                <!-- <span class="btn-inner--icon"><img src="assets/img/icons/common/fb.svg"></span> -->
+                <span class="btn-inner--text">Transactions</span>
+              </a>
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon" (click)="login()">
+                <!-- <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span> -->
+                <span class="btn-inner--text">Logins</span>
+              </a>
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon" (click)="new()">
+                <!-- <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span> -->
+                <span class="btn-inner--text">News</span>
+              </a>
+              <br><br>
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon" (click)="stop()">
+                <!-- <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span> -->
+                <span class="btn-inner--text">Stop</span>
+              </a>
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon" (click)="reset()">
+                <!-- <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span> -->
+                <span class="btn-inner--text">Reset</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row py-5 mt-3">
+          <div class="col-12  text-center">
+            <a href="javascript:void(0)" class="text-light"><small>Disclaimer - In case of portal crash due to heavy traffic, the current positions in the leaderboard would be considered final and the winners will be alloted prizes on the same rankings.</small></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

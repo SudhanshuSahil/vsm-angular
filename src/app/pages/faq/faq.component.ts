@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SpinnerService } from 'src/app/spinner/spinner.service';
 
 @Component({
   selector: 'app-faq',
@@ -8,14 +9,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FaqComponent implements OnInit {
 
-  faqs: {};
+  faqs: [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private spinner: SpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.requestStarted();
     this.http.get<any>("https://django.ecell.in/vsm/faq/").subscribe(
       data => {
-        this.faqs = data;
+        this.faqs = data.reverse();
+        this.spinner.requestEnded();
       }
     )
   }

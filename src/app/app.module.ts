@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -21,11 +21,23 @@ import { CountdownModule } from 'ngx-countdown';
 import { FaqComponent } from './pages/faq/faq.component';
 import { SponserComponent } from './pages/sponser/sponser.component';
 import { BonusComponent } from './pages/bonus/bonus.component';
+import { MarketComponent } from './pages/market/market.component';
+import { HoldingComponent } from './pages/holding/holding.component';
+import { TransacComponent } from './pages/transac/transac.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MarketdialogComponent } from './components/marketdialog/marketdialog.component';
+import { NewsComponent } from './pages/news/news.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
+import { SecLoginComponent } from './pages/sec-login/sec-login.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { OverloadComponent } from './pages/overload/overload.component';
+import { OverlayComponent } from './overlay/overlay.component';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,
@@ -34,6 +46,7 @@ import { BonusComponent } from './pages/bonus/bonus.component';
     BrowserModule,
     SocialLoginModule,
     CountdownModule,
+    MatDialogModule,
   ],
   declarations: [
     AppComponent,
@@ -42,7 +55,20 @@ import { BonusComponent } from './pages/bonus/bonus.component';
     TimerComponent,
     FaqComponent,
     SponserComponent,
-    BonusComponent
+    BonusComponent,
+    MarketComponent,
+    HoldingComponent,
+    TransacComponent,
+    MarketdialogComponent,
+    NewsComponent,
+    LeaderboardComponent,
+    SecLoginComponent,
+    SpinnerComponent,
+    OverloadComponent,
+    OverlayComponent,
+  ],
+  entryComponents: [
+    MarketdialogComponent
   ],
   providers: [
     {

@@ -16,6 +16,10 @@
     </form> -->
     <!-- User -->
     <ul class="navbar-nav align-items-center d-none d-md-flex">
+      <li class="nav-item">
+        <span *ngIf="!game_time" class="mb-0 text-sm text-danger  font-weight-bold">Market Closed</span>
+        <span *ngIf="game_time" class="mb-0 text-sm text-success  font-weight-bold">Market Open</span>
+      </li>
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <div class="media align-items-center">

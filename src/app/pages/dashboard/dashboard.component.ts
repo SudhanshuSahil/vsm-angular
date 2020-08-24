@@ -8,6 +8,8 @@ import {
   chartExample1,
   chartExample2
 } from "../../variables/charts";
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { SpinnerService } from 'src/app/spinner/spinner.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,45 +23,67 @@ export class DashboardComponent implements OnInit {
   public salesChart;
   public clicked: boolean = true;
   public clicked1: boolean = false;
+  holdings;
+  transactions;
+  cash : number;
+  count : number;
+  net : number = 0;
+  net_worth: number;
 
-  constructor() { }
+  constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
+    this.spinnerService.requestStarted();
 
-    this.datasets = [
-      [0, 20, 10, 30, 15, 40, 20, 60, 60],
-      [0, 20, 5, 25, 10, 30, 15, 40, 40]
-    ];
-    this.data = this.datasets[0];
-
-
-    var chartOrders = document.getElementById('chart-orders');
-
-    parseOptions(Chart, chartOptions());
-
-
-    var ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-      options: chartExample2.options,
-      data: chartExample2.data
+    var header = new HttpHeaders({
+      'Authorization': "Bearer " + localStorage.getItem('token')
     });
 
-    var chartSales = document.getElementById('chart-sales');
+    this.http.get<any>('https://django.ecell.in/vsm/my-holdings/', {headers: header}).subscribe(
+      data => {
+        // console.log('aaaaaaaaaaa')
+        this.holdings = data
 
-    this.salesChart = new Chart(chartSales, {
-			type: 'line',
-			options: chartExample1.options,
-			data: chartExample1.data
-		});
-  }
+        this.count = this.holdings.length
 
+        this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
+            data => {
+              // console.log('cashhhhh')
+              this.cash = data['cash'];
+              this.cash = Math.floor(this.cash)
+              this.net_worth = this.net + this.cash;
+              this.spinnerService.requestEnded();              
+            },
+            error => {
+              console.log(error);
+              this.spinnerService.requestEnded();   
+              
+            }
+        )
 
+        this.holdings.forEach(element => {
+          this.net += element['quantity']*element['company_cmp']      
+          this.net = Math.floor(this.net)
+        });
+      },
+      error => {
+        this.spinnerService.requestEnded();   
+        console.error('error');
+        
+      }
+    )
 
-
-
-  public updateOptions() {
-    this.salesChart.data.datasets[0].data = this.data;
-    this.salesChart.update();
+    this.http.get<any>('https://django.ecell.in/vsm/trans/', {headers: header}).subscribe(
+      data => {
+        // console.log(data)
+        this.transactions = data.reverse()
+      },
+      error => {
+        console.error('error');
+        
+      }
+    )
+    
   }
 
 }
