@@ -81,7 +81,7 @@ export class MarketComponent implements OnInit, OnDestroy {
 
       this.spinner.requestStarted();
 
-      this.http.post<any>("https://django.ecell.in/vsm/trans/", body, {headers: header}).subscribe(
+      this.http.post<any>("https://api.ecell.in/vsm/trans/", body, {headers: header}).subscribe(
         data => {
           this.spinner.requestEnded();
           this.updateCompanies()
@@ -101,7 +101,7 @@ export class MarketComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.spinner.requestStarted();
 
-    this.http.get<any>('https://django.ecell.in/vsm/companies/').subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/companies/').subscribe(
       data => {
         this.companies = data
         this.a = true;
@@ -139,6 +139,18 @@ export class MarketComponent implements OnInit, OnDestroy {
       var end_time = new Date('2020-08-23 22:00:00')
       base_min = 120
     }
+    else if(now.getDate() == 24){
+      console.log('day 1');
+      var start_time = new Date('2020-08-24 21:00:00')
+      var end_time = new Date('2020-08-24 22:00:00')
+      base_min = 0
+    }
+    else if(now.getDate() == 25){
+      console.log('day 1');
+      var start_time = new Date('2020-08-25 19:00:00')
+      var end_time = new Date('2020-08-25 20:20:00')
+      base_min = 75
+    }
     else {
       var start_time = new Date('2020-08-21 21:00:00')
       var end_time = new Date('2020-08-21 22:00:00')
@@ -151,7 +163,7 @@ export class MarketComponent implements OnInit, OnDestroy {
     else {
       this.game_time = false;
     }
-    const check = interval(10000)
+    const check = interval(15000)
     this.sub = check.subscribe(val => {
       this.updateCompanies();
       now = new Date()
@@ -167,7 +179,7 @@ export class MarketComponent implements OnInit, OnDestroy {
       'Authorization': "Bearer " + localStorage.getItem('token')
     });
 
-    this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
+    this.http.get<any>("https://api.ecell.in/vsm/me/", {headers: header}).subscribe(
             data => {
               // console.log('cashhhhh')
               this.cash = data['cash'];
@@ -222,7 +234,7 @@ export class MarketComponent implements OnInit, OnDestroy {
           var diff = current_time.getTime() - start_time.getTime()
         
           var minutes = base_min + Math.floor(diff / (60 * 1000)) ;
-          console.log('inside loop market', minutes);
+          // console.log('inside loop market', minutes);
 
 
 
@@ -253,7 +265,7 @@ export class MarketComponent implements OnInit, OnDestroy {
 
   updateCompanies(){
     // console.log('upadating ...');
-    this.http.get<any>('https://django.ecell.in/vsm/companies/').subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/companies/').subscribe(
       data => {   
         // console.log('accepted');            
         this.companies = data

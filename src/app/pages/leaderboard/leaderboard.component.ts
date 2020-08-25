@@ -24,7 +24,7 @@ export class LeaderboardComponent implements OnInit {
       'Authorization': "Bearer " + localStorage.getItem('token') 
     });
 
-    this.http.get<any>('https://django.ecell.in/vsm/leaders/', {headers: header}).subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/leaders/', {headers: header}).subscribe(
       data => {        
         // console.log(data)
         this.leaders = data
@@ -39,7 +39,7 @@ export class LeaderboardComponent implements OnInit {
       }
     )
 
-    this.http.get<any>('https://django.ecell.in/vsm/leaders-iitb/', {headers: header}).subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/leaders-iitb/', {headers: header}).subscribe(
       data => {        
         // console.log(data)
         this.iitb = data

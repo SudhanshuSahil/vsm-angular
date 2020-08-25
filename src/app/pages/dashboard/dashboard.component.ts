@@ -39,14 +39,14 @@ export class DashboardComponent implements OnInit {
       'Authorization': "Bearer " + localStorage.getItem('token')
     });
 
-    this.http.get<any>('https://django.ecell.in/vsm/my-holdings/', {headers: header}).subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/my-holdings/', {headers: header}).subscribe(
       data => {
         // console.log('aaaaaaaaaaa')
         this.holdings = data
 
         this.count = this.holdings.length
 
-        this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
+        this.http.get<any>("https://api.ecell.in/vsm/me/", {headers: header}).subscribe(
             data => {
               // console.log('cashhhhh')
               this.cash = data['cash'];
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
       }
     )
 
-    this.http.get<any>('https://django.ecell.in/vsm/trans/', {headers: header}).subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/trans/', {headers: header}).subscribe(
       data => {
         // console.log(data)
         this.transactions = data.reverse()

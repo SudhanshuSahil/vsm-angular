@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   url;
   fname;
   lname;
+  name;
   access_token;
   game_time: Boolean;
 
@@ -61,9 +62,21 @@ export class NavbarComponent implements OnInit {
       var end_time = new Date('2020-08-23 22:00:00')
       base_min = 120
     }
+    else if(now.getDate() == 24){
+      console.log('day 1');
+      var start_time = new Date('2020-08-24 21:00:00')
+      var end_time = new Date('2020-08-24 22:00:00')
+      base_min = 0
+    }
+    else if(now.getDate() == 25){
+      console.log('day 1');
+      var start_time = new Date('2020-08-25 19:00:00')
+      var end_time = new Date('2020-08-25 20:20:00')
+      base_min = 75
+    }
     else {
       var start_time = new Date('2020-08-21 21:00:00')
-      var end_time = new Date('2020-08-21 22:00:00')
+      var end_time = new Date('2020-08-21 22:20:00')
     }
 
     if (now.getTime() > start_time.getTime() && now.getTime() < end_time.getTime()){
@@ -84,6 +97,8 @@ export class NavbarComponent implements OnInit {
     })
 
 
+    this.listTitles = ROUTES.filter(listTitle => listTitle);
+
     this.url = 'https://www.ecell.in/ca/dash/assets/img/person_holder.jpg';
     if(localStorage.getItem('image_url')){
       this.url = localStorage.getItem('image_url');
@@ -93,12 +108,18 @@ export class NavbarComponent implements OnInit {
     var header = new HttpHeaders({
       'Authorization': "Bearer " + access_token 
     });
+    
+    if(localStorage.getItem('name') ){
+      this.name = localStorage.getItem('name')
+      // return;
+    }
 
-    this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
+    this.http.get<any>("https://api.ecell.in/vsm/me/", {headers: header}).subscribe(
       data => {
         // console.log(data)
         this.fname = data['fname'];
         this.lname = data['lname'];
+        this.name = this.fname + " " + this.lname;
       },
       error => {
         console.info('referesh token: ', localStorage.getItem('refresh_token'))
@@ -123,7 +144,7 @@ export class NavbarComponent implements OnInit {
               'Authorization': "Bearer " + data['access_token']
             });
 
-            this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header1}).subscribe(
+            this.http.get<any>("https://api.ecell.in/vsm/me/", {headers: header1}).subscribe(
             data => {
               console.log(data)
               this.fname = data['fname'];
@@ -140,8 +161,7 @@ export class NavbarComponent implements OnInit {
               
       }
     )
-    
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());

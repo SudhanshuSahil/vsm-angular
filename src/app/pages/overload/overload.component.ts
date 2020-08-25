@@ -120,7 +120,7 @@ export class OverloadComponent implements OnInit {
       'Authorization': "Bearer " + this.dToken
     });
     var body = new FormData();
-    body.append('code', 'test')
+    body.append('code', 'icici')
     body.append('transac_type', 'buy')
     body.append('quantity', '5')
 

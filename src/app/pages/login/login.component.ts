@@ -4,6 +4,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
+import { noUndefined } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -55,16 +56,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     var body = new FormData();
     body.append('grant_type', 'convert_token');
     body.append('backend', backend);
-    body.append('client_id', 'lMUgn0nSzO8TX2EdU0gQ7IoaLI6iDeUsBSUVC2qd');
-    body.append('client_secret', 'qg3qhBTh6YEjJDd7nP9CrBZuMip8JjsG3SwV2l4KD6Is1gefhKPGko1p7QF9bPpLQ2xkt1blj99wXCzftTyX4XEz9R9bgdIjKbBC5azt3HJpJy2hPaoZvhKdwKFjOEkB');
+    body.append('client_id', 'QHC0HHfSYaPcw2wr4ghMGhF4kvW7ul4oxVEUwCrG');
+    body.append('client_secret', 'wQSBW56cywhMcHCjfEVh9sMZWzOsKLYKhJeMK1hFRZzp2u0aPVqqhCipuWB83lRuFHl7TUMUmUoN8iLzsxr6xN4rN0ZkpctsnPPPLqps05CItM9KH2Sool1VvCm4G95c');
     body.append('token', authToken);
 
-    this.http.post<any>("https://django.ecell.in/django-oauth/convert-token", body).subscribe(
+    this.http.post<any>("https://api.ecell.in/django-oauth/convert-token", body).subscribe(
     data => {
       this.access_token = data['access_token'];
       // console.log(data);
       localStorage.setItem('token', this.access_token);
       localStorage.setItem('refresh_token', data['refresh_token'])
+      var time= new Date()
+      var str = time.toString()
+      localStorage.setItem('last_login', str);
       
       this.router.navigate(['user-profile'])
     });

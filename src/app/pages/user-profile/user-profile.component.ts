@@ -76,9 +76,10 @@ export class UserProfileComponent implements OnInit {
       'Authorization': "Bearer " + access_token 
     });
 
-    this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
+    this.http.get<any>("https://api.ecell.in/vsm/me/", {headers: header}).subscribe(
       data => {
         // console.log(data)
+        localStorage.setItem('name', data['fname'] + " " + data['lname'])
         this.username = data['username'];
         this.email = data['email'];
         this.fname = data['fname'];

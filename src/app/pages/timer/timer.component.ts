@@ -78,7 +78,7 @@ export class TimerComponent implements OnInit {
       'Authorization': "Bearer " + access_token 
     });
     
-    this.http.get<any>("https://django.ecell.in/vsm/me/", {headers: header}).subscribe(
+    this.http.get<any>("https://api.ecell.in/vsm/me/", {headers: header}).subscribe(
       data => {
         this.spinner.requestEnded()
         // console.log(data)

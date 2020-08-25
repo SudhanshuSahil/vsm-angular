@@ -20,7 +20,7 @@ export class TransacComponent implements OnInit {
       'Authorization': "Bearer " + localStorage.getItem('token')
     });
 
-    this.http.get<any>('https://django.ecell.in/vsm/trans/', {headers: header}).subscribe(
+    this.http.get<any>('https://api.ecell.in/vsm/trans/', {headers: header}).subscribe(
       data => {
         // console.log(data)
         this.spinner.requestEnded();
