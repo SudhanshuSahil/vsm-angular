@@ -117,9 +117,15 @@ export class HoldingComponent implements OnInit, OnDestroy {
     }
     else if(now.getDate() == 25){
       console.log('day 1');
-      var start_time = new Date('2020-08-25 19:00:00')
-      var end_time = new Date('2020-08-25 20:20:00')
-      base_min = 75
+      var start_time = new Date('2020-08-25 22:00:00')
+      var end_time = new Date('2020-08-25 23:00:00')
+      base_min = 15
+    }
+    else if(now.getDate() == 26){
+      console.log('day 1');
+      var start_time = new Date('2020-08-26 22:00:00')
+      var end_time = new Date('2020-08-26 23:00:00')
+      base_min = 190
     }
     else {
       var start_time = new Date('2020-08-21 21:00:00')

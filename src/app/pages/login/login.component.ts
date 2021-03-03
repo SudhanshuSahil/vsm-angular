@@ -69,8 +69,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       var time= new Date()
       var str = time.toString()
       localStorage.setItem('last_login', str);
-      
-      this.router.navigate(['user-profile'])
     });
 
   }
